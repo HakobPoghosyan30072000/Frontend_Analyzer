@@ -14,7 +14,12 @@ export interface ParsedComponent {
 export const useComponentParser = (code: string) => {
   const [parsed, setParsed] = useState<ParsedComponent | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+    useEffect(() => {
+        if (error) {
+          console.error('Component parser error:', error);
+        }
+    }, [error]);
+  
   useEffect(() => {
     const trimmed = code.trim();
     if (!trimmed) {
